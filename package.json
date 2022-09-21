@@ -1,0 +1,17 @@
+{
+  "name": "solidity-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": ["metacoin"],
+  "repository": "git@github.com:zhaoyi0113/solidity-tutorial.git",
+  "author": "Joey Zhao <zhaoyi0113@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "cd metacoin && truffle compile",
+    "test": "cd metacoin && truffle test"
+  },
+  "devDependencies": {
+    "truffle": "^5.5.30"
+  }
+}
