@@ -1,6 +1,9 @@
 {
+  "name": "metacoin",
   "scripts": {
     "build": "truffle compile",
-    "test": "truffle test"
+    "test": "truffle test",
+    "truffle": "truffle",
+    "deploy:local": "truffle migrate --network development"
   }
 }

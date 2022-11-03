@@ -2,6 +2,7 @@
 // Tells the Solidity compiler to compile only from v0.8.13 to v0.9.0
 pragma solidity ^0.8.13;
 
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./ConvertLib.sol";
 
 // This is just a simple example of a coin-like contract.
@@ -9,27 +10,47 @@ import "./ConvertLib.sol";
 // coin/token contracts.
 
 contract MetaCoin {
-	mapping (address => uint) balances;
+    mapping(address => uint256) balances;
 
-	event Transfer(address indexed _from, address indexed _to, uint256 _value);
+    uint256 transactionCount = 0;
 
-	constructor() {
-		balances[tx.origin] = 10000;
-	}
+		AggregatorV3Interface internal priceFeed;
 
-	function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
-		if (balances[msg.sender] < amount) return false;
-		balances[msg.sender] -= amount;
-		balances[receiver] += amount;
-		emit Transfer(msg.sender, receiver, amount);
-		return true;
-	}
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
-	function getBalanceInEth(address addr) public view returns(uint){
-		return ConvertLib.convert(getBalance(addr),2);
-	}
+    constructor() {
+        balances[tx.origin] = 10000;
+				priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
+    }
 
-	function getBalance(address addr) public view returns(uint) {
-		return balances[addr];
-	}
+    function sendCoin(address receiver, uint256 amount)
+        public
+        returns (bool sufficient)
+    {
+        if (balances[msg.sender] < amount) return false;
+        balances[msg.sender] -= amount;
+        balances[receiver] += amount;
+        transactionCount++;
+        emit Transfer(msg.sender, receiver, amount);
+        return true;
+    }
+
+    function getBalanceInEth(address addr) public view returns (uint256) {
+        return ConvertLib.convert(getBalance(addr), 2);
+    }
+
+    function getBalance(address addr) public view returns (uint256) {
+        return balances[addr];
+    }
+
+		function getLatestPrice() public view returns (int) {
+        (
+            /*uint80 roundID*/,
+            int price,
+            /*uint startedAt*/,
+            /*uint timeStamp*/,
+            /*uint80 answeredInRound*/
+        ) = priceFeed.latestRoundData();
+        return price;
+    }
 }

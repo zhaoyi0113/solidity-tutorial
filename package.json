@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "private": true,
-  "workspaces": ["metacoin"],
+  "workspaces": [
+    "metacoin"
+  ],
   "repository": "git@github.com:zhaoyi0113/solidity-tutorial.git",
   "author": "Joey Zhao <zhaoyi0113@gmail.com>",
   "license": "MIT",
@@ -13,5 +15,8 @@
   },
   "devDependencies": {
     "truffle": "^5.5.30"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.5.1"
   }
 }
