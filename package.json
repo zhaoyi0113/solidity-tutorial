@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "private": true,
-  "workspaces": ["metacoin", "helloworld"],
+  "workspaces": [
+    "metacoin",
+    "helloworld"
+  ],
   "repository": "git@github.com:zhaoyi0113/solidity-tutorial.git",
   "author": "Joey Zhao <zhaoyi0113@gmail.com>",
   "license": "MIT",
