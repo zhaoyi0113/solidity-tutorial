@@ -10,4 +10,8 @@ contract Inbox {
     function getMessage() public view returns (string memory) {
         return message;
     }
+
+    function getContractBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
 }
