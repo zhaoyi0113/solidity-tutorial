@@ -14,10 +14,10 @@
     "build": "cd metacoin && truffle compile",
     "test": "cd metacoin && truffle test"
   },
-  "devDependencies": {
-    "truffle": "^5.5.30"
-  },
   "dependencies": {
     "@chainlink/contracts": "^0.5.1"
+  },
+  "devDependencies": {
+    "truffle": "^5.11.3"
   }
 }
